@@ -1,0 +1,6 @@
+namespace bn
+{
+    class BigInteger
+    {
+    };
+}
