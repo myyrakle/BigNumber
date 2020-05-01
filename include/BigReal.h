@@ -1,0 +1,4 @@
+namespace bn
+{
+    class BigReal;
+}
