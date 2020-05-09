@@ -1,3 +1,6 @@
+#ifndef __BIG_INTEGER__
+#define __BIG_INTEGER__
+
 #include <vector>
 
 constexpr int INTERVAL = '0'-0;
@@ -103,3 +106,5 @@ public:
 };
 
 BigInteger operator ""bi(unsigned long long n);
+
+#endif
