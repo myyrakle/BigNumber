@@ -2,8 +2,9 @@
 #define __BIG_INTEGER__
 
 #include <vector>
+#include <string>
 
-constexpr int INTERVAL = '0'-0;
+constexpr auto INTERVAL = '0'-0;
 
 class BigInteger
 {
@@ -11,7 +12,7 @@ public:
   using Self = BigInteger;
 private:
   std::vector<char> num;
-  bool sign; //부호비트
+  bool sign = true; //부호비트
 private:
   template <class Integer>
   BigInteger(Integer n, nullptr_t _)
@@ -56,10 +57,7 @@ public:
   BigInteger(unsigned long long n): BigInteger(n, nullptr)
   {}
 public:
-  BigInteger()
-  {
-    num.push_back(0);
-  }
+  BigInteger();
   virtual ~BigInteger() = default;
 public:
   BigInteger(const BigInteger&) = default;
@@ -88,23 +86,15 @@ public: //비교연산자
   friend bool operator!=(const BigInteger& lhs, const BigInteger& rhs);
   
 public:
-  std::string to_string() const
-  {
-    std::string s;
-    if(!sign)
-    {
-      s.push_back('-');
-    }
-    
-    for(auto it = num.rbegin(); it!=num.rend(); it++)
-    {
-      s.push_back(*it+INTERVAL);
-    }
-    
-    return s;
-  }
+  std::string to_string() const;
 };
 
 BigInteger operator ""bi(unsigned long long n);
+
+#include <ostream>
+std::ostream& operator<<(std::ostream& os, const BigInteger& n);
+
+#include <istream>
+std::istream& operator>>(std::istream& is, BigInteger& n);
 
 #endif
