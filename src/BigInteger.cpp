@@ -1,5 +1,7 @@
 #include "BigInteger.h"
 
+namespace bignumber{
+
 BigInteger::BigInteger()
 {
   num.push_back(0);
@@ -169,4 +171,6 @@ bool operator==(const BigInteger& lhs, const BigInteger& rhs)
 bool operator!=(const BigInteger& lhs, const BigInteger& rhs)
 {
   
+}
+
 }
