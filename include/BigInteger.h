@@ -4,6 +4,9 @@
 #include <vector>
 #include <string>
 
+namespace bignumber
+{
+
 constexpr auto INTERVAL = '0'-0;
 
 class BigInteger
@@ -96,5 +99,7 @@ std::ostream& operator<<(std::ostream& os, const BigInteger& n);
 
 #include <istream>
 std::istream& operator>>(std::istream& is, BigInteger& n);
+
+}
 
 #endif
