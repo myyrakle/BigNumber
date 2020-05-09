@@ -36,12 +36,13 @@ std::string BigInteger::to_string() const
   return s;
 }
 
-//구현
 BigInteger operator ""bi(unsigned long long n)
 {
   return BigInteger(n);
 }
 
+
+//이항 사칙연산자
 BigInteger operator+(const BigInteger& lhs, const BigInteger& rhs)
 {
   if(lhs.sign==rhs.sign)
@@ -114,6 +115,58 @@ BigInteger operator/(const BigInteger& lhs, const BigInteger& rhs)
   
 }
 BigInteger operator%(const BigInteger& lhs, const BigInteger& rhs)
+{
+  
+}
+
+//단항연산자
+BigInteger& BigInteger::operator++()
+{
+  
+}
+BigInteger BigInteger::operator++(int)
+{
+  
+}
+BigInteger BigInteger::operator+() const
+{
+  
+}
+BigInteger& BigInteger::operator--()
+{
+  
+}
+BigInteger BigInteger::operator--(int)
+{
+  
+}
+BigInteger BigInteger::operator-() const
+{
+  
+}
+
+//비교연산자
+bool operator<(const BigInteger& lhs, const BigInteger& rhs)
+{
+  
+}
+bool operator>(const BigInteger& lhs, const BigInteger& rhs)
+{
+  
+}
+bool operator<=(const BigInteger& lhs, const BigInteger& rhs)
+{
+  
+}
+bool operator>=(const BigInteger& lhs, const BigInteger& rhs)
+{
+  
+}
+bool operator==(const BigInteger& lhs, const BigInteger& rhs)
+{
+  
+}
+bool operator!=(const BigInteger& lhs, const BigInteger& rhs)
 {
   
 }
