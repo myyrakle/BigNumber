@@ -7,6 +7,9 @@
 namespace bignumber
 {
 
+#include <vector>
+#include <string>
+
 constexpr auto INTERVAL = '0'-0;
 
 class BigInteger
@@ -39,26 +42,20 @@ private:
     }
   }
 public:
-  BigInteger(signed char n): BigInteger(n, nullptr)
-  {}
-  BigInteger(short n): BigInteger(n, nullptr)
-  {}
-  BigInteger(int n): BigInteger(n, nullptr)
-  {}
-  BigInteger(long n): BigInteger(n, nullptr)
-  {}
-  BigInteger(long long n): BigInteger(n, nullptr)
-  {}
-  BigInteger(unsigned char n): BigInteger(n, nullptr)
-  {}
-  BigInteger(unsigned short n): BigInteger(n, nullptr)
-  {}
-  BigInteger(unsigned int n): BigInteger(n, nullptr)
-  {}
-  BigInteger(unsigned long n): BigInteger(n, nullptr)
-  {}
-  BigInteger(unsigned long long n): BigInteger(n, nullptr)
-  {}
+  BigInteger(signed char n);
+  BigInteger(short n);
+  BigInteger(int n);
+  BigInteger(long n);
+  BigInteger(long long n);
+  BigInteger(unsigned char n);
+  BigInteger(unsigned short n);
+  BigInteger(unsigned int n);
+  BigInteger(unsigned long n);
+  BigInteger(unsigned long long n);
+  BigInteger(const std::string& n);
+  
+public:
+  
 public:
   BigInteger();
   virtual ~BigInteger() = default;
@@ -73,6 +70,12 @@ public: //이항산술연산자
   friend BigInteger operator*(const BigInteger& lhs, const BigInteger& rhs);
   friend BigInteger operator/(const BigInteger& lhs, const BigInteger& rhs);
   friend BigInteger operator%(const BigInteger& lhs, const BigInteger& rhs);
+public:
+  friend BigInteger& operator+=(const BigInteger& lhs, const BigInteger& rhs);
+  friend BigInteger& operator-=(const BigInteger& lhs, const BigInteger& rhs);
+  friend BigInteger& operator*=(const BigInteger& lhs, const BigInteger& rhs);
+  friend BigInteger& operator/=(const BigInteger& lhs, const BigInteger& rhs);
+  friend BigInteger& operator%=(const BigInteger& lhs, const BigInteger& rhs);
 public: //단항연산자
   BigInteger& operator++();
   BigInteger operator++(int);
@@ -89,6 +92,11 @@ public: //비교연산자
   friend bool operator!=(const BigInteger& lhs, const BigInteger& rhs);
   
 public:
+  bool is_zero() const noexcept;
+  bool is_odd() const noexcept;
+  bool is_even() const noexcept;
+  bool is_negative() const noexcept;
+  bool is_positive() const noexcept;
   std::string to_string() const;
 };
 
@@ -99,6 +107,7 @@ std::ostream& operator<<(std::ostream& os, const BigInteger& n);
 
 #include <istream>
 std::istream& operator>>(std::istream& is, BigInteger& n);
+
 
 }
 
