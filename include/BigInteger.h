@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <cstdint>
 
 namespace bignumber
 {
@@ -98,6 +99,17 @@ public:
   bool is_negative() const noexcept;
   bool is_positive() const noexcept;
   std::string to_string() const;
+
+public:
+  operator int8_t() const;
+  operator int16_t() const;
+  operator int32_t() const;
+  operator int64_t() const;
+  operator uint8_t() const;
+  operator uint16_t() const;
+  operator uint32_t() const;
+  operator uint64_t() const;
+  operator std::string() const;
 };
 
 BigInteger operator ""bi(unsigned long long n);
