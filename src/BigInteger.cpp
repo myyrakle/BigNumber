@@ -3,336 +3,336 @@
 
 namespace bignumber{
 
-BigInteger::BigInteger(signed char n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(short n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(int n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(long n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(long long n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(unsigned char n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(unsigned short n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(unsigned int n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(unsigned long n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(unsigned long long n): BigInteger(n, nullptr)
-{}
-BigInteger::BigInteger(const std::string& n): BigInteger(std::stoi(n))
-{}
+  BigInteger::BigInteger(signed char n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(short n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(int n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(long n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(long long n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(unsigned char n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(unsigned short n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(unsigned int n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(unsigned long n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(unsigned long long n): BigInteger(n, nullptr)
+  {}
+  BigInteger::BigInteger(const std::string& n): BigInteger(std::stoi(n))
+  {}
 
-BigInteger::BigInteger()
-{
-  num.push_back(0);
-}
-
-
-std::ostream& operator<<(std::ostream& os, const BigInteger& n)
-{
-  os << n.to_string();
-  return os;
-}
-
-std::istream& operator>>(std::istream& is, BigInteger& n)
-{
-  std::string buffer;
-  is>>buffer;
-  //TODO
-  return is;
-}
-
-std::string BigInteger::to_string() const
-{
-  std::string s;
-  if(!sign)
+  BigInteger::BigInteger()
   {
-    s.push_back('-');
+    num.push_back(0);
   }
-    
-  for(auto it = num.rbegin(); it!=num.rend(); it++)
+
+
+  std::ostream& operator<<(std::ostream& os, const BigInteger& n)
   {
-    s.push_back(*it+INTERVAL);
+    os << n.to_string();
+    return os;
   }
-    
-  return s;
-}
 
-BigInteger operator ""bi(unsigned long long n)
-{
-  return BigInteger(n);
-}
-
-
-//이항 사칙연산자
-BigInteger operator+(const BigInteger& lhs, const BigInteger& rhs)
-{
-  if(lhs.sign==rhs.sign)
+  std::istream& operator>>(std::istream& is, BigInteger& n)
   {
-    BigInteger n;
-    n.num.clear();
-    
-    int carry = 0;
-    
-    for(int i = 0; i<lhs.num.size() || i<rhs.num.size(); i++)
+    std::string buffer;
+    is>>buffer;
+    //TODO
+    return is;
+  }
+
+  std::string BigInteger::to_string() const
+  {
+    std::string s;
+    if(!sign)
     {
-      int l;
-      int r;
+      s.push_back('-');
+    }
       
-      if(i>=lhs.num.size())
+    for(auto it = num.rbegin(); it!=num.rend(); it++)
+    {
+      s.push_back(*it+INTERVAL);
+    }
+      
+    return s;
+  }
+
+  BigInteger operator ""bi(unsigned long long n)
+  {
+    return BigInteger(n);
+  }
+
+
+  //이항 사칙연산자
+  BigInteger operator+(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    if(lhs.sign==rhs.sign)
+    {
+      BigInteger n;
+      n.num.clear();
+      
+      int carry = 0;
+      
+      for(int i = 0; i<lhs.num.size() || i<rhs.num.size(); i++)
       {
-        l = 0;
-        r = rhs.num[i];
-      }
-      else if(i>=rhs.num.size())
-      {
-        l = lhs.num[i];
-        r = 0;
-      }
-      else
-      {
-        l = lhs.num[i];
-        r = rhs.num[i];
+        int l;
+        int r;
+        
+        if(i>=lhs.num.size())
+        {
+          l = 0;
+          r = rhs.num[i];
+        }
+        else if(i>=rhs.num.size())
+        {
+          l = lhs.num[i];
+          r = 0;
+        }
+        else
+        {
+          l = lhs.num[i];
+          r = rhs.num[i];
+        }
+        
+        int sum = l+r+carry;
+        //cout<<"l:"<<l<<", r:"<<r<<endl;
+        //cout<<"sum:"<<sum<<endl;
+        carry = 0;
+        if(sum>9)
+        {
+          sum-=10;
+          carry=1;
+        }
+        
+        n.num.push_back(sum);
       }
       
-      int sum = l+r+carry;
-      //cout<<"l:"<<l<<", r:"<<r<<endl;
-      //cout<<"sum:"<<sum<<endl;
-      carry = 0;
-      if(sum>9)
+      if(carry>0)
       {
-        sum-=10;
-        carry=1;
+        n.num.push_back(carry);
       }
       
-      n.num.push_back(sum);
+      return n;
+    }
+    else if(lhs.sign)
+    {
+      return lhs-rhs;
+    }
+    else if(rhs.sign)
+    {
+      return rhs-lhs;
+    }
+  }
+
+  BigInteger operator-(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    
+  }
+
+  BigInteger operator*(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    
+  }
+
+  BigInteger operator/(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    
+  }
+
+  BigInteger operator%(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    
+  }
+
+  BigInteger& operator+=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    lhs = std::move(lhs+rhs);
+    return lhs;
+  }
+
+  BigInteger& operator-=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    lhs = std::move(lhs-rhs);
+    return lhs;
+  }
+
+  BigInteger& operator*=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    lhs = std::move(lhs*rhs);
+    return lhs;
+  }
+
+  BigInteger& operator/=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    lhs = std::move(lhs/rhs);
+    return lhs;
+  }
+
+  BigInteger& operator%=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    lhs = std::move(lhs%rhs);
+    return lhs;
+  }
+
+
+  //단항연산자
+  BigInteger& BigInteger::operator++()
+  {
+    if(sign)
+    {
+      
+    }
+    else
+    {
+      
     }
     
-    if(carry>0)
-    {
-      n.num.push_back(carry);
-    }
-    
-    return n;
+    return *this;
   }
-  else if(lhs.sign)
+
+  BigInteger BigInteger::operator++(int)
   {
-    return lhs-rhs;
+    return ++(*this);
   }
-  else if(rhs.sign)
-  {
-    return rhs-lhs;
-  }
-}
 
-BigInteger operator-(const BigInteger& lhs, const BigInteger& rhs)
-{
-  
-}
-
-BigInteger operator*(const BigInteger& lhs, const BigInteger& rhs)
-{
-  
-}
-
-BigInteger operator/(const BigInteger& lhs, const BigInteger& rhs)
-{
-  
-}
-
-BigInteger operator%(const BigInteger& lhs, const BigInteger& rhs)
-{
-  
-}
-
-BigInteger& operator+=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  lhs = std::move(lhs+rhs);
-  return lhs;
-}
-
-BigInteger& operator-=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  lhs = std::move(lhs-rhs);
-  return lhs;
-}
-
-BigInteger& operator*=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  lhs = std::move(lhs*rhs);
-  return lhs;
-}
-
-BigInteger& operator/=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  lhs = std::move(lhs/rhs);
-  return lhs;
-}
-
-BigInteger& operator%=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  lhs = std::move(lhs%rhs);
-  return lhs;
-}
-
-
-//단항연산자
-BigInteger& BigInteger::operator++()
-{
-  if(sign)
-  {
-    
-  }
-  else
-  {
-    
-  }
-  
-  return *this;
-}
-
-BigInteger BigInteger::operator++(int)
-{
-  return ++(*this);
-}
-
-BigInteger BigInteger::operator+() const
-{
-  return *this;
-}
-
-BigInteger& BigInteger::operator--()
-{
-  
-}
-
-BigInteger BigInteger::operator--(int)
-{
-  return --(*this);
-}
-
-BigInteger BigInteger::operator-() const
-{
-  if(num.size()==1 && num[0]==0)
+  BigInteger BigInteger::operator+() const
   {
     return *this;
   }
-  
-  sign = !sign;
-  return *this;p
-}
 
-template <class Operator>
-bool _less_or_greater(const BigInteger& lhs, const BigInteger& rhs, Operator op)
-{
-  if(lhs.is_negative() && rhs.is_positive())
+  BigInteger& BigInteger::operator--()
   {
-    return true;
-  }
-  if(lhs.is_positive() && rhs.is_negative())
-  {
-    return false;
-  }
-  
-  positive = lhs.is_positive();
-  
-  auto lhs_length = lhs.num.size();
-  auto rhs_length = rhs.num.size();
-  if(lhs_length < rhs_length)
-  {
-    return positive ? true : false;
-  }
-  if(lhs_length > rhs_length)
-  {
-    return positive ? false : true;
-  }
     
-  for(int i = lhs_size-1; i>=0; i--)
-  {
-    if(lhs.num[i] < rhs.num[i])
-    {
-      return positive ? true : false;
-    }
-    if(lhs.num[i] > rhs.num[i])
-    {
-      return positive ? false : true;
-    }
   }
+
+  BigInteger BigInteger::operator--(int)
+  {
+    return --(*this);
+  }
+
+  BigInteger BigInteger::operator-() const
+  {
+    if(num.size()==1 && num[0]==0)
+    {
+      return *this;
+    }
     
-  return false;
-}
-
-//비교연산자
-bool operator<(const BigInteger& lhs, const BigInteger& rhs)
-{
-  
-}
-
-bool operator>(const BigInteger& lhs, const BigInteger& rhs)
-{
-  
-}
-
-bool operator<=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  return !(lhs>rhs);
-}
-
-bool operator>=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  return !(lhs<rhs);
-}
-
-bool operator==(const BigInteger& lhs, const BigInteger& rhs)
-{
-  if(lhs.sign!=rhs.sign || lhs.num.size()!=rhs.num.size())
-  {
-    return false;
+    sign = !sign;
+    return *this;p
   }
-  
-  for(int i = 0; i<lhs.num.size(); i++)
+
+  template <class Operator>
+  bool _less_or_greater(const BigInteger& lhs, const BigInteger& rhs, Operator op)
   {
-    if(lhs.num[i]!=rhs.num[i])
+    if(lhs.is_negative() && rhs.is_positive())
+    {
+      return true;
+    }
+    if(lhs.is_positive() && rhs.is_negative())
     {
       return false;
     }
+    
+    positive = lhs.is_positive();
+    
+    auto lhs_length = lhs.num.size();
+    auto rhs_length = rhs.num.size();
+    if(lhs_length < rhs_length)
+    {
+      return positive ? true : false;
+    }
+    if(lhs_length > rhs_length)
+    {
+      return positive ? false : true;
+    }
+      
+    for(int i = lhs_size-1; i>=0; i--)
+    {
+      if(lhs.num[i] < rhs.num[i])
+      {
+        return positive ? true : false;
+      }
+      if(lhs.num[i] > rhs.num[i])
+      {
+        return positive ? false : true;
+      }
+    }
+      
+    return false;
   }
-  
-  return true;
-}
 
-bool operator!=(const BigInteger& lhs, const BigInteger& rhs)
-{
-  return !(lhs==rhs);
-}
+  //비교연산자
+  bool operator<(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    
+  }
 
-bool BigInteger::is_zero() const noexcept
-{
-  return num.size()==1 && num[0]==0;
-}
+  bool operator>(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    
+  }
 
-bool BigInteger::is_odd() const noexcept
-{
-  return num[0]%2 == 0;
-}
+  bool operator<=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    return !(lhs>rhs);
+  }
 
-bool BigInteger::is_even() const noexcept
-{
-  return !is_odd();
-}
+  bool operator>=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    return !(lhs<rhs);
+  }
 
-bool BigInteger::is_negative() const noexcept
-{
-  return sign==false;
-}
+  bool operator==(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    if(lhs.sign!=rhs.sign || lhs.num.size()!=rhs.num.size())
+    {
+      return false;
+    }
+    
+    for(int i = 0; i<lhs.num.size(); i++)
+    {
+      if(lhs.num[i]!=rhs.num[i])
+      {
+        return false;
+      }
+    }
+    
+    return true;
+  }
 
-bool BigInteger::is_positive() const noexcept
-{
-  return sign==true;
-}
+  bool operator!=(const BigInteger& lhs, const BigInteger& rhs)
+  {
+    return !(lhs==rhs);
+  }
+
+  bool BigInteger::is_zero() const noexcept
+  {
+    return num.size()==1 && num[0]==0;
+  }
+
+  bool BigInteger::is_odd() const noexcept
+  {
+    return num[0]%2 == 0;
+  }
+
+  bool BigInteger::is_even() const noexcept
+  {
+    return !is_odd();
+  }
+
+  bool BigInteger::is_negative() const noexcept
+  {
+    return sign==false;
+  }
+
+  bool BigInteger::is_positive() const noexcept
+  {
+    return sign==true;
+  }
   
 }
