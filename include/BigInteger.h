@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 #include <cstdint>
+#include <ostream>
+#include <istream>
 
 namespace bignumber
 {
@@ -111,10 +113,8 @@ namespace bignumber
 
   BigInteger operator ""bi(unsigned long long n);
 
-  #include <ostream>
   std::ostream& operator<<(std::ostream& os, const BigInteger& n);
-
-  #include <istream>
+  
   std::istream& operator>>(std::istream& is, BigInteger& n);
 }
 
