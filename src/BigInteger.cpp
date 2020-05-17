@@ -1,7 +1,8 @@
 #include "./include/BigInteger.h"
 #include <utility>
 
-namespace bignumber{
+namespace bignumber
+{
 
   BigInteger::BigInteger(signed char n): BigInteger(n, nullptr)
   {}
@@ -149,31 +150,31 @@ namespace bignumber{
     
   }
 
-  BigInteger& operator+=(const BigInteger& lhs, const BigInteger& rhs)
+  BigInteger& operator+=(BigInteger& lhs, const BigInteger& rhs)
   {
     lhs = std::move(lhs+rhs);
     return lhs;
   }
 
-  BigInteger& operator-=(const BigInteger& lhs, const BigInteger& rhs)
+  BigInteger& operator-=(BigInteger& lhs, const BigInteger& rhs)
   {
     lhs = std::move(lhs-rhs);
     return lhs;
   }
 
-  BigInteger& operator*=(const BigInteger& lhs, const BigInteger& rhs)
+  BigInteger& operator*=(BigInteger& lhs, const BigInteger& rhs)
   {
     lhs = std::move(lhs*rhs);
     return lhs;
   }
 
-  BigInteger& operator/=(const BigInteger& lhs, const BigInteger& rhs)
+  BigInteger& operator/=(BigInteger& lhs, const BigInteger& rhs)
   {
     lhs = std::move(lhs/rhs);
     return lhs;
   }
 
-  BigInteger& operator%=(const BigInteger& lhs, const BigInteger& rhs)
+  BigInteger& operator%=(BigInteger& lhs, const BigInteger& rhs)
   {
     lhs = std::move(lhs%rhs);
     return lhs;

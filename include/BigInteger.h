@@ -9,7 +9,6 @@
 
 namespace bignumber
 {
-
   constexpr auto INTERVAL = '0'-0;
 
   class BigInteger
@@ -71,11 +70,11 @@ namespace bignumber
     friend BigInteger operator/(const BigInteger& lhs, const BigInteger& rhs);
     friend BigInteger operator%(const BigInteger& lhs, const BigInteger& rhs);
   public:
-    friend BigInteger& operator+=(const BigInteger& lhs, const BigInteger& rhs);
-    friend BigInteger& operator-=(const BigInteger& lhs, const BigInteger& rhs);
-    friend BigInteger& operator*=(const BigInteger& lhs, const BigInteger& rhs);
-    friend BigInteger& operator/=(const BigInteger& lhs, const BigInteger& rhs);
-    friend BigInteger& operator%=(const BigInteger& lhs, const BigInteger& rhs);
+    friend BigInteger& operator+=(BigInteger& lhs, const BigInteger& rhs);
+    friend BigInteger& operator-=(BigInteger& lhs, const BigInteger& rhs);
+    friend BigInteger& operator*=(BigInteger& lhs, const BigInteger& rhs);
+    friend BigInteger& operator/=(BigInteger& lhs, const BigInteger& rhs);
+    friend BigInteger& operator%=(BigInteger& lhs, const BigInteger& rhs);
   public: //단항연산자
     BigInteger& operator++();
     BigInteger operator++(int);
