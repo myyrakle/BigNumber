@@ -1,4 +1,4 @@
-#include "./include/BigInteger.h"
+#include "./../include/BigInteger.h"
 #include <utility>
 
 namespace bignumber
@@ -222,9 +222,11 @@ namespace bignumber
     {
       return *this;
     }
+
+    BigInteger clone = *this;
     
-    sign = !sign;
-    return *this;p
+    clone.sign = !clone.sign;
+    return clone;
   }
 
   template <class Operator>
@@ -239,7 +241,7 @@ namespace bignumber
       return false;
     }
     
-    positive = lhs.is_positive();
+    auto positive = lhs.is_positive();
     
     auto lhs_length = lhs.num.size();
     auto rhs_length = rhs.num.size();
@@ -252,7 +254,7 @@ namespace bignumber
       return positive ? false : true;
     }
       
-    for(int i = lhs_size-1; i>=0; i--)
+    for(int i = lhs_length-1; i>=0; i--)
     {
       if(lhs.num[i] < rhs.num[i])
       {
