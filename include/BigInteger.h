@@ -110,11 +110,11 @@ namespace bignumber
     operator std::string() const;
   };
 
-  BigInteger operator ""bi(unsigned long long n);
-
   std::ostream& operator<<(std::ostream& os, const BigInteger& n);
   
   std::istream& operator>>(std::istream& is, BigInteger& n);
 }
+
+bignumber::BigInteger operator ""bi(unsigned long long n);
 
 #endif

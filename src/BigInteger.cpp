@@ -63,12 +63,6 @@ namespace bignumber
     return s;
   }
 
-  BigInteger operator ""bi(unsigned long long n)
-  {
-    return BigInteger(n);
-  }
-
-
   //이항 사칙연산자
   BigInteger operator+(const BigInteger& lhs, const BigInteger& rhs)
   {
@@ -338,4 +332,9 @@ namespace bignumber
     return sign==true;
   }
   
+}
+
+bignumber::BigInteger operator ""bi(unsigned long long n)
+{
+  return bignumber::BigInteger(n);
 }
